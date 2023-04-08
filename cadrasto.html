@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Insira o seu nome: <input id="ipt_nome"><br>
+    Insira o seu sobrenome : <input id="ipt_sobreNome"><br>
+    insira seu email: <input type="text" id="ipt_email">
+    <select onclick="VerificarUser()" id="verificarUser">
+        <option value=""></option>
+        <option value="CPF">CPF</option>
+        <option value="CNPJ">CNPJ</option>
+    </select><br>
+    <div id="ExibirCampo"></div><br>
+    celular : <input type="number" id="ipt_celular"><br>
+    Cep : <input type="number" min="8" id="ipt_cep"><br>
+    Rua : <input type="text" id="ipt_rua"><br>
+    Bairro : <input type="text" id="ipt_bairro"><br>
+    Cidade: <input type="text" id="ipt_cidade"><br>
+    Estado: <input type="text" id="ipt_estado"><br>
+    Numero: <input type="text" id="ipt_numeroCasa"><br>
+
+    Senha : <input type="password" id="ipt_senha"><br>
+    <button onclick="Cadastrar()"><a href="./login.html">Cadastrar</a></button>
+</body>
+
+</html>
+<script>
+    var cpf, cnpj, verificar;
+    function VerificarUser() {
+        verificar = verificarUser.value
+        if (verificar == 'CPF') {
+            ExibirCampo.innerHTML = `Insira seu CPF : <input type="number" id="ipt_cpf">`
+        } else if (verificar == 'CNPJ') {
+            ExibirCampo.innerHTML = `Insira seu CNPJ : <input type="number" id="ipt_cnpj">`
+        }
+    }
+    function Cadastrar() {
+        var nome = ipt_nome.value
+        var sobreNome = ipt_sobreNome.value
+        var email = ipt_email.value
+        var celular = ipt_celular.value
+        var cep = ipt_cep.value
+        var rua = ipt_rua.value
+        var bairro = ipt_bairro.value
+        var cidade = ipt_cidade.value
+        var estado = ipt_estado.value
+        var numero = ipt_numero.value
+        var senha  = ipt_senha.value
+        if (verificar == 'CPF') {
+            cpf = ipt_cpf.value
+        } else if (verificar == 'CNPJ') {
+            cnpj = ipt_cnpj.value
+        }
+    }
+</script>
