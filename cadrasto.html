@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./viaCep.js"></script>
     <title>Document</title>
 </head>
 
@@ -12,51 +13,73 @@
     Insira o seu nome: <input id="ipt_nome"><br>
     Insira o seu sobrenome : <input id="ipt_sobreNome"><br>
     insira seu email: <input type="text" id="ipt_email">
-    <select onclick="VerificarUser()" id="verificarUser">
-        <option value=""></option>
-        <option value="CPF">CPF</option>
-        <option value="CNPJ">CNPJ</option>
-    </select><br>
-    <div id="ExibirCampo"></div><br>
-    celular : <input type="number" id="ipt_celular"><br>
-    Cep : <input type="number" min="8" id="ipt_cep"><br>
-    Rua : <input type="text" id="ipt_rua"><br>
-    Bairro : <input type="text" id="ipt_bairro"><br>
-    Cidade: <input type="text" id="ipt_cidade"><br>
-    Estado: <input type="text" id="ipt_estado"><br>
-    Numero: <input type="text" id="ipt_numeroCasa"><br>
 
     Senha : <input type="password" id="ipt_senha"><br>
+
+    celular : <input maxlength="15" id="tel" onkeypress="Telefone(tel.value)"><br>
+    CPF : <input maxlength="14" id="cpf" onkeypress="CPF(cpf.value)"><br>
+    CNPJ : <input maxlength="14" id="cnpj">
+
+
+
+
+      <label>Cep:
+        <input name="cep" type="text" id="cep" value="" size="10" maxlength="9"
+               onblur="pesquisacep(this.value);" /></label><br />
+        <label>Rua:
+        <input name="rua" type="text" id="rua" size="60" /></label><br />
+        <label>Bairro:
+        <input name="bairro" type="text" id="bairro" size="40" /></label><br />
+        <label>Cidade:
+        <input name="cidade" type="text" id="cidade" size="40" /></label><br />
+        <label>Estado:
+        <input name="uf" type="text" id="uf" size="2" /></label><br />
+        <label>IBGE:
+        <input name="ibge" type="text" id="ibge" size="8" /></label><br />
+
     <button onclick="Cadastrar()"><a href="./login.html">Cadastrar</a></button>
 </body>
 
 </html>
 <script>
-    var cpf, cnpj, verificar;
-    function VerificarUser() {
-        verificar = verificarUser.value
-        if (verificar == 'CPF') {
-            ExibirCampo.innerHTML = `Insira seu CPF : <input type="number" id="ipt_cpf">`
-        } else if (verificar == 'CNPJ') {
-            ExibirCampo.innerHTML = `Insira seu CNPJ : <input type="number" id="ipt_cnpj">`
-        }
+    function Mascara(valuecpf, patternCpf) {
+        let i = 0;
+        let v = valuecpf.toString();
+        v = v.replace(/\D/g, '');
+        return patternCpf.replace(/#/g, () => v[i++] || '');
+    };
+
+    function CPF(valuecpf) {
+        const cpf = Mascara(valuecpf, '###.###.###-##');
+        document.getElementById('cpf').value = cpf;
     }
-    function Cadastrar() {
-        var nome = ipt_nome.value
-        var sobreNome = ipt_sobreNome.value
-        var email = ipt_email.value
-        var celular = ipt_celular.value
-        var cep = ipt_cep.value
-        var rua = ipt_rua.value
-        var bairro = ipt_bairro.value
-        var cidade = ipt_cidade.value
-        var estado = ipt_estado.value
-        var numero = ipt_numero.value
-        var senha  = ipt_senha.value
-        if (verificar == 'CPF') {
-            cpf = ipt_cpf.value
-        } else if (verificar == 'CNPJ') {
-            cnpj = ipt_cnpj.value
-        }
+
+    function Telefone(valueTel) {
+        const formatado = Mascara(valueTel, '(##) #####-####');
+        document.getElementById('tel').value = formatado;
     }
+
+ 
+
+    const input = document.getElementById("cnpj");
+    input.addEventListener("keyup", formatarCNPJ);
+    function formatarCNPJ(e) {
+    
+        var v = e.target.value.replace(/\D/g, "");
+
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+
+        v = v.replace(/(\d{4})(\d)/, "$1-$2");
+
+        e.target.value = v;
+
+
+
+    }
+
+    
 </script>
