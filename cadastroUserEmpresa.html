@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    nome : <input type="text" id="ipt_nomeUser"><br>
+    email : <input type="text" id="ipt_emailUser"><br>
+    senha : <input type="text" id="ipt_Senha"><br>
+    CPF : <input maxlength="14" id="cpf" onkeypress="CPF(cpf.value)"><br>
+    Cargo : <select name="" id="ipt_cargo">
+        <option value="Funcionario">Funcionario</option>
+        <option value="Dono">Dono</option>
+    </select><br>
+    Nivel Aceeso :
+    <select name="" id="ipt_Acesso">
+        <option value="Total">Total</option>
+        <option value="medio">Medio</option>
+        <option value="nenhum">nenhum</option>
+    </select>
+    <button>Cadastrar Pessoa</button>
+</body>
+</html>
+<script>
+    function CadastroUser(){
+        var nome = ipt_nomeUser.value
+        var email = ipt_emailUser.value
+        var senha = ipt_Senha.value
+        var cpf = ipt_cpf.value
+        var cargo = ipt_cargo.value
+        var acesso = ipt_Acesso.value
+    }
+    function Mascara(valuecpf, patternCpf) {
+        let i = 0;
+        let v = valuecpf.toString();
+        v = v.replace(/\D/g, '');
+        return patternCpf.replace(/#/g, () => v[i++] || '');
+    };
+
+    function CPF(valuecpf) {
+        const cpf = Mascara(valuecpf, '###.###.###-##');
+        document.getElementById('cpf').value = cpf;
+    }
+</script>

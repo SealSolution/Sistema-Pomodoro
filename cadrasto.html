@@ -11,18 +11,9 @@
 
 <body>
     Insira o seu nome: <input id="ipt_nome"><br>
-    Insira o seu sobrenome : <input id="ipt_sobreNome"><br>
     insira seu email: <input type="text" id="ipt_email">
-
     Senha : <input type="password" id="ipt_senha" maxlength="12"><br>
-
-    celular : <input maxlength="15" id="tel" onkeypress="Telefone(tel.value)"><br>
-    CPF : <input maxlength="14" id="cpf" onkeypress="CPF(cpf.value)"><br>
     CNPJ : <input maxlength="14" id="cnpj">
-
-
-
-
     <label>Cep:
         <input name="cep" type="text" id="cep" value="" size="10" maxlength="9"
             onblur="pesquisacep(this.value);" /></label><br />
@@ -32,8 +23,17 @@
         <input name="bairro" type="text" id="bairro" size="40" /></label><br />
     <label>Cidade:
         <input name="cidade" type="text" id="cidade" size="40" /></label><br />
+    <label>num :
+        <input name="num" type="text" id="num_Comp" size="2" /></label><br />
     <label>Estado:
         <input name="uf" type="text" id="uf" size="2" /></label><br />
+    <label>Complemento:
+        <input name="complemento" type="text" id="complemento"/></label><br />
+    </label>
+    <label>Descrição:
+        <input name="descricao" type="text" id="descricao"/></label><br />
+    </label>
+
 
     <button onclick="Cadastrar()"><a href="./login.html">Cadastrar</a></button>
 </body>
@@ -41,37 +41,33 @@
 </html>
 <script>
     function Cadastrar() {
+
         var nomeUsuario = ipt_nome.value
         var sobreNome = ipt_sobreNome.value
         var email = ipt_email.value
+        var descEmp = descricao.value
         var senha = ipt_senha.value
-        var telefone = tel.value
-        var cpfuser = cpf.value
         var cnpjuser = cnpj.value
         var cepuser = cep.value
         var ruauser = rua.value
         var bairrouser = bairro.value
         var cidadeuser = cidade.value
         var ufuser = uf.value
+        var numComp = num_Comp.value
+
         if (
-            nomeUsuario && sobreNome && email && senha &&
-            telefone && cepuser && ruauser && bairrouser && cidadeuser && ufuser && cpfuser
-            || nomeUsuario && sobreNome && email && senha &&
+            nomeUsuario && descEmp && numComp && sobreNome && email && senha &&
             telefone && cepuser && ruauser && bairrouser && cidadeuser && ufuser && cnpjuser
         ) alert('Usuario cadastrado com sucesso.')
         else alert('Erro')
     }
-    function Mascara(valuecpf, patternCpf) {
+    function Mascara(value, pattern) {
         let i = 0;
-        let v = valuecpf.toString();
+        let v = value.toString();
         v = v.replace(/\D/g, '');
-        return patternCpf.replace(/#/g, () => v[i++] || '');
+        return pattern.replace(/#/g, () => v[i++] || '');
     };
 
-    function CPF(valuecpf) {
-        const cpf = Mascara(valuecpf, '###.###.###-##');
-        document.getElementById('cpf').value = cpf;
-    }
 
     function Telefone(valueTel) {
         const formatado = Mascara(valueTel, '(##) #####-####');
